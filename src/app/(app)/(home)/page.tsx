@@ -209,7 +209,7 @@ const Welcome = () => {
           )}
         >
           <small>
-            当第一颗卫星飞向大气层外，我们便以为自己终有一日会征服宇宙。
+            卑鄙是卑鄙者的通行证据，高尚是高尚者的墓志铭。
           </small>
           <span className="mt-8 animate-bounce">
             <i className="icon-[mingcute--right-line] rotate-90 text-2xl" />
@@ -493,7 +493,7 @@ const FriendScreen = () => {
     <Screen className="flex h-auto min-h-[100vh] center">
       <div className="flex min-w-0 flex-col">
         <BottomToUpTransitionView className="text-center text-3xl font-medium">
-          这些是我珍视的人，他们陪伴我走过人生的每一段旅程。
+          不要小看我们之间的羁绊啊，混蛋！
         </BottomToUpTransitionView>
         <ul
           className={clsx(
