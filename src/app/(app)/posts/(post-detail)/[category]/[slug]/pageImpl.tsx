@@ -2,6 +2,7 @@ import type { PostModel } from '@mx-space/api-client'
 
 import { AckRead } from '~/components/common/AckRead'
 import { ClientOnly } from '~/components/common/ClientOnly'
+import { Presence } from '~/components/modules/activity'
 import {
   PostActionAside,
   PostBottomBarAction,
@@ -49,8 +50,9 @@ const PostPage = (props: PostModel) => {
 
           <PostRelated />
         </header>
-        <WrappedElementProvider>
+        <WrappedElementProvider eoaDetect>
           <ReadIndicatorForMobile />
+          <Presence />
           <PostMarkdownImageRecordProvider>
             <MarkdownSelection>
               <PostMarkdown />
