@@ -209,7 +209,7 @@ const Hero = () => {
           )}
         >
           <small>
-            卑鄙是卑鄙者的通行证据，高尚是高尚者的墓志铭。
+            卑鄙是卑鄙者的通行证，高尚是高尚者的墓志铭。
           </small>
           <span className="mt-8 animate-bounce">
             <i className="icon-[mingcute--right-line] rotate-90 text-2xl" />
