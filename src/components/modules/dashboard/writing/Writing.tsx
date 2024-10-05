@@ -11,17 +11,15 @@ import { callCommand } from '@milkdown/utils'
 import { produce } from 'immer'
 import { atom, useAtomValue, useSetAtom, useStore } from 'jotai'
 import type { FC } from 'react'
-import React, { isValidElement, useEffect, useRef } from 'react'
+import React, { isValidElement } from 'react'
 
 import { SimpleIconsMermaid } from '~/components/icons/mermaid'
 import { useEditorCtx } from '~/components/ui/editor/Milkdown/ctx'
 import { excalidrawSchema } from '~/components/ui/editor/Milkdown/plugins/Excalidraw'
+import { TextArea } from '~/components/ui/input'
 import { useEventCallback } from '~/hooks/common/use-event-callback'
-import { clsxm } from '~/lib/helper'
-import { jotaiStore } from '~/lib/store'
 
 import type { MilkdownRef } from '../../../ui/editor'
-import { MilkdownEditor } from '../../../ui/editor'
 import { useBaseWritingContext } from './BaseWritingProvider'
 import { TitleInput } from './TitleInput'
 
@@ -56,54 +54,54 @@ const MenuBar = () => {
 
   const menuList = [
     {
-      icon: 'icon-[material-symbols--undo]',
+      icon: 'i-material-symbols-undo',
       action: () => editorRef?.getAction(callCommand(undoCommand.key)),
     },
     {
-      icon: 'icon-[material-symbols--redo]',
+      icon: 'i-material-symbols-redo',
       action: () => editorRef?.getAction(callCommand(redoCommand.key)),
     },
     {
-      icon: 'icon-[mingcute--bold-fill]',
+      icon: 'i-mingcute-bold-fill',
       action: () => editorRef?.getAction(callCommand(toggleStrongCommand.key)),
     },
     {
-      icon: 'icon-[mingcute--italic-fill]',
+      icon: 'i-mingcute-italic-fill',
       action: () =>
         editorRef?.getAction(callCommand(toggleEmphasisCommand.key)),
     },
     {
-      icon: 'icon-[mingcute--list-check-fill]',
+      icon: 'i-mingcute-list-check-fill',
       action: () =>
         editorRef?.getAction(callCommand(wrapInBulletListCommand.key)),
     },
     {
-      icon: 'icon-[material-symbols--format-list-numbered-rounded]',
+      icon: 'i-material-symbols-format-list-numbered-rounded',
       action: () =>
         editorRef?.getAction(callCommand(wrapInOrderedListCommand.key)),
     },
     {
-      icon: 'icon-[material-symbols--format-h1]',
+      icon: 'i-material-symbols-format-h1',
       action: () =>
         editorRef?.getAction(callCommand(wrapInHeadingCommand.key, 1)),
     },
     {
-      icon: 'icon-[material-symbols--format-h2]',
+      icon: 'i-material-symbols-format-h2',
       action: () =>
         editorRef?.getAction(callCommand(wrapInHeadingCommand.key, 2)),
     },
     {
-      icon: 'icon-[material-symbols--format-h3]',
+      icon: 'i-material-symbols-format-h3',
       action: () =>
         editorRef?.getAction(callCommand(wrapInHeadingCommand.key, 3)),
     },
     {
-      icon: 'icon-[material-symbols--format-h4]',
+      icon: 'i-material-symbols-format-h4',
       action: () =>
         editorRef?.getAction(callCommand(wrapInHeadingCommand.key, 4)),
     },
     {
-      icon: 'icon-[mingcute--drawing-board-line]',
+      icon: 'i-mingcute-drawing-board-line',
       action: () => {
         if (!ctx) return
         const view = ctx.get(editorViewCtx)
@@ -188,31 +186,23 @@ const Editor = () => {
     })
   })
   const store = useStore()
-  const handleMarkdownChange = useEventCallback(setText)
-  const milkdownRef = useRef<MilkdownRef>(null)
-
-  useEffect(() => {
-    jotaiStore.set(milkdownRefAtom, milkdownRef.current)
-    return () => {
-      jotaiStore.set(milkdownRefAtom, null)
-    }
-  }, [])
 
   return (
     <>
-      <MenuBar />
-      <div
-        className={clsxm(
-          'relative h-0 grow overflow-auto rounded-xl border p-3 duration-200 focus-within:border-accent',
-          'border-zinc-200 bg-white placeholder:text-slate-500 focus-visible:border-accent dark:border-neutral-800 dark:bg-zinc-900',
-        )}
-      >
-        <MilkdownEditor
+      {/* <MenuBar /> */}
+
+      {/* <MilkdownEditor
           ref={milkdownRef}
           onMarkdownChange={handleMarkdownChange}
           initialMarkdown={store.get(ctxAtom).text}
-        />
-      </div>
+        /> */}
+      <TextArea
+        className="bg-base-100"
+        defaultValue={store.get(ctxAtom).text}
+        onChange={(e) => {
+          setText(e.target.value)
+        }}
+      />
     </>
   )
 }

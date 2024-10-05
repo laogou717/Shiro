@@ -4,6 +4,7 @@ import { AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { Fragment } from 'react'
 
+import { getAdminUrl } from '~/atoms'
 import { useIsLogged } from '~/atoms/hooks'
 import { useSessionReader } from '~/atoms/hooks/reader'
 import { UserArrowLeftIcon } from '~/components/icons/user-arrow-left'
@@ -113,11 +114,20 @@ export function UserAuth() {
                     onClick={() => {
                       window.open('/dashboard', '_blank')
                     }}
-                    icon={
-                      <i className="icon-[mingcute--dashboard-3-line] size-4" />
-                    }
+                    icon={<i className="i-mingcute-dashboard-3-line size-4" />}
                   >
-                    Dashboard
+                    轻管理
+                  </DropdownMenuItem>
+                  <DropdownMenuItem
+                    onClick={() => {
+                      const adminUrl = getAdminUrl()
+                      if (adminUrl) {
+                        window.open(adminUrl, '_blank')
+                      }
+                    }}
+                    icon={<i className="i-mingcute-dashboard-2-line size-4" />}
+                  >
+                    控制台
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                 </Fragment>
@@ -130,9 +140,9 @@ export function UserAuth() {
                   ])
                   removeToken()
                 }}
-                icon={<i className="icon-[mingcute--exit-line] size-4" />}
+                icon={<i className="i-mingcute-exit-line size-4" />}
               >
-                Sign out
+                登出
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenuPortal>
